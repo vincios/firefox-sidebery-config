@@ -1,0 +1,163 @@
+:root {
+    --navbar-height: 48px;
+    --wc-height: 16px;
+    --wc-left-margin: 10px;
+    --wc-red: hsl(-10, 90%, 60%);
+    --wc-yellow: hsl(50, 90%, 60%);
+    --wc-green: hsl(160, 90%, 40%);
+    
+    --accent-color: rgba(54, 54, 54);
+    --secondary-accent-color: rgba(140, 140, 140, 1);
+    --third-accent-color: rgba(190, 190, 190, 1);
+    --light-color: rgba(255, 255, 255, 1);
+    --dark-color: rgba(36, 36, 36, 1);
+    --caption-min-color: rgba(255, 133, 94, 1);
+    --caption-max-color: rgba(255, 100, 159, 1);
+    --caption-close-color: rgba(153, 132, 255, 1);
+}
+
+/* To auto-hide the horizontal tab bar when the sidebar is active */
+/* NOTE: go to Sidebery settings > Help > Preface value, enable it and set it to https://unicode-explorer.com/c/200B.  */
+#main-window #titlebar {
+    overflow: hidden;
+    transition: height 0.3s !important;
+}
+
+#main-window #TabsToolbar .toolbar-items {
+    transition: all 0.3s !important;
+}
+
+/* Default state: Set initial height to enable animation */
+#main-window #titlebar { height: 4em !important; }
+#main-window[uidensity="touch"] #titlebar { height: 4.35em !important; }
+#main-window[uidensity="compact"] #titlebar { height: 3.7em !important; }
+
+#main-window[titlepreface*="​"] #titlebar {
+    height: 2em !important;
+    display: flex;
+}
+
+#main-window[titlepreface*="​"] #TabsToolbar .toolbar-items {
+    visibility: collapse;
+    -moz-window-dragging: drag;
+}
+
+#main-window[titlepreface*="​"] #titlebar .titlebar-buttonbox-container {
+    margin-left: auto;
+}
+
+#main-window[titlepreface*="​"] #titlebar-spacer {
+    background-color: var(--chrome-secondary-background-color);
+}
+
+#main-window[titlepreface*="​"] #titlebar-buttonbox-container {
+    background-color: var(--chrome-secondary-background-color);
+}
+
+#main-window[titlepreface*="​"] .titlebar-color {
+    background-color: var(--toolbar-bgcolor);
+}
+
+/*================== CAPTION BUTTONS ==================*/
+.titlebar-buttonbox {
+    position: relative;
+    margin-right: 0px;
+}
+.titlebar-button {
+    transition: all 0.3s ease !important;
+    padding: 8px 12px !important;
+}
+.titlebar-button.titlebar-close {
+    padding-right: 26px !important;
+}
+.titlebar-button > .toolbarbutton-icon {
+    transition: all 0.3s ease !important;
+    list-style-image: none;
+    border-radius: 20px;
+}
+
+.titlebar-button.titlebar-min > .toolbarbutton-icon {
+    background: var(--caption-min-color) !important;
+}
+.titlebar-button.titlebar-max > .toolbarbutton-icon,
+.titlebar-button.titlebar-restore > .toolbarbutton-icon {
+    background: var(--caption-max-color) !important;
+}
+.titlebar-button.titlebar-close > .toolbarbutton-icon {
+    background: var(--caption-close-color) !important;
+}
+
+.titlebar-button:hover > .toolbarbutton-icon {
+    background: var(--third-accent-color) !important;
+}
+
+.titlebar-button:hover {
+    background-color: transparent !important;
+}
+
+.titlebar-button.titlebar-min:hover,
+.titlebar-button.titlebar-max:hover,
+.titlebar-button.titlebar-restore:hover,
+.titlebar-button.titlebar-close:hover {
+    background-color: transparent !important;
+}
+
+/*================== SIDEBERY  ==================*/
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] #sidebar-header {
+    visibility: collapse;
+}
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_sidebar.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/* Show sidebar only when the cursor is over it  */
+/* The border controlling sidebar width will be removed so you'll need to modify these values to change width */
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+    --uc-sidebar-width: 40px !important;
+    --uc-sidebar-hover-width: 300px;
+    --uc-autohide-sidebar-delay: 100ms; /* Wait 0.1s before hiding sidebar */
+    position: relative;
+    min-width: var(--uc-sidebar-width) !important;
+    width: var(--uc-sidebar-width) !important;
+    max-width: var(--uc-sidebar-width) !important;
+    z-index:1;
+}
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] > #sidebar-splitter {
+    display: none
+}
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] > #sidebar {
+    transition: min-width 115ms linear var(--uc-autohide-sidebar-delay) !important;
+    min-width: var(--uc-sidebar-width) !important;
+    will-change: min-width;
+}
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:hover > #sidebar{
+    min-width: var(--uc-sidebar-hover-width) !important;
+    transition-delay: 0ms !important
+}
+
+/* Add sidebar divider and give it background */
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] > #sidebar,
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] > #sidebar-header {
+    background-color: var(--toolbar-bgcolor) !important;
+    /*  border-inline: 1px solid var(--sidebar-border-color) !important;*/
+    border-inline: 1px solid var(--chrome-content-separator-color) !important;
+    border-inline-width: 0px 1px;
+}
+#sidebar-box[positionend]{
+    direction: rtl
+}
+#sidebar-box[positionend] > *{
+    direction: ltr
+}
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl){
+    direction: ltr
+}
+#sidebar-box[positionend]:-moz-locale-dir(rtl) > *{
+    direction: rtl
+}
